@@ -1,4 +1,4 @@
-name: Build and Push Container Image
+name: Build, Test & Push Container Image
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-test-push:
     runs-on: ubuntu-latest
 
     steps:
