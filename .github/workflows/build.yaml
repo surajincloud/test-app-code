@@ -41,7 +41,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: |
-            surajnarwade/dev-test-app:latest
-            surajnarwade/dev-test-app:${{ github.ref_slug }}
-            surajnarwade/dev-test-app:${{ github.sha }}
+          tags: surajnarwade/dev-test-app:latest, surajnarwade/dev-test-app:${{ github.ref_slug }}, surajnarwade/dev-test-app:${{ github.sha }}
