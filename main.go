@@ -1,14 +1,18 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 var (
+	environment = os.Getenv("ENVIRONMENT")
+
 	appVersion string
 	version    = prometheus.NewGauge(prometheus.GaugeOpts{
 		Name: "version",
@@ -30,7 +34,7 @@ var (
 
 	foundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Hello World !!!"))
+		w.Write([]byte(fmt.Sprintf("Hello World from %s", environment)))
 	})
 	notfoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)

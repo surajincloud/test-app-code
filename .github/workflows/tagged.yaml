@@ -1,15 +1,15 @@
-name: Build, Test & Push Container Image - ON PRs
+name: Build, Test & Push Container Image - ON Tags
 
 on:
-  pull_request:
-    branches:
-      - main
+  push:
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build-test-push:
     runs-on: ubuntu-latest
     env:
-      image_name: docker.io/surajnarwade/dev-test-app
+      image_name: docker.io/surajnarwade/prod-test-app
 
     steps:
       - name: Checkout code
@@ -57,7 +57,7 @@ jobs:
             ${{ env.image_name }}
           tags: |
             type=raw,value=latest
-            type=raw,value=${{ github.head_ref }}-${{ env.SHA }}
+            type=raw,value=${{ github.ref_name }}
 
 
       - name: Build and Push Docker Image
