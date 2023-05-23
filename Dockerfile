@@ -1,5 +1,17 @@
+FROM golang:1.20 AS builder
+
+WORKDIR /app
+
+COPY . .
+
+RUN go mod download
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o app .
+
 FROM quay.io/prometheus/busybox:latest
 
-ADD app /bin/app
+WORKDIR /app
 
-ENTRYPOINT ["/bin/app"]
+COPY --from=builder /app/app .
+
+ENTRYPOINT ["./app"]
