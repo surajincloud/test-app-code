@@ -26,8 +26,8 @@ jobs:
       - name: Unit test
         run: go test 
 
-    - name: Add SHORT_SHA env property with commit short sha
-      run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Add SHORT_SHA env property with commit short sha
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
 
       # https://github.com/docker/login-action
       - name: Log in to container registry
