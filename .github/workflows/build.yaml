@@ -1,9 +1,6 @@
 name: Build, Test & Push Container Image
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -44,4 +41,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: surajnarwade/test-app:latest
+          tags: |
+            surajnarwade/dev/test-app:latest
+            surajnarwade/dev/test-app:${{ github.ref_slug }}
+            surajnarwade/dev/test-app:${{ github.sha }}
