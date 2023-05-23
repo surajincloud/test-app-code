@@ -26,8 +26,16 @@ jobs:
       - name: Unit test
         run: go test 
 
-      - name: Add SHORT_SHA env property with commit short sha
-        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+      - uses: benjlevesque/short-sha@v2.2
+        id: short-sha
+
+      - run: echo $SHA
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+
+      - run: echo $SHA
+        env:
+          SHA: ${{ env.SHA }}
 
       # https://github.com/docker/login-action
       - name: Log in to container registry
@@ -51,8 +59,8 @@ jobs:
             type=raw,value=latest
             type=raw,value=${{ github.sha }}
             type=raw,value=${{ github.head_ref }}
-            type=raw,value=${SHORT_SHA}
-            type=raw,value=${{ github.head_ref }}-${SHORT_SHA}
+            type=raw,value=${{ env.SHA }}
+            type=raw,value=${{ github.head_ref }}-${{ env.SHA }}
 
 
       - name: Build and Push Docker Image
