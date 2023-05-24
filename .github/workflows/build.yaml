@@ -57,7 +57,7 @@ jobs:
             ${{ env.image_name }}
           tags: |
             type=raw,value=latest
-            type=raw,value=${{ github.head_ref }}-${{ github.sha }}
+            type=raw,value="${{ github.head_ref }}-${GITHUB_SHA}"
 
 
 
