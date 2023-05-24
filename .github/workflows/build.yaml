@@ -26,17 +26,6 @@ jobs:
       - name: Unit test
         run: go test 
 
-      - uses: benjlevesque/short-sha@v2.2
-        id: short-sha
-
-      - run: echo $SHA
-        env:
-          SHA: ${{ steps.short-sha.outputs.sha }}
-
-      - run: echo $SHA
-        env:
-          SHA: ${{ env.SHA }}
-
       # https://github.com/docker/login-action
       - name: Log in to container registry
         uses: docker/login-action@v2
@@ -57,7 +46,8 @@ jobs:
             ${{ env.image_name }}
           tags: |
             type=raw,value=latest
-            type=raw,value=${{ github.head_ref }}-${{ env.SHA }}
+            type=raw,value=${{ github.head_ref }}-${{ github.event.pull_request.head.sha }}
+
 
 
       - name: Build and Push Docker Image
