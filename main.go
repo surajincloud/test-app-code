@@ -34,7 +34,7 @@ var (
 
 	foundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(fmt.Sprintf("Hello World from %s", environment)))
+		w.Write([]byte(fmt.Sprintf("!Hello World from %s", environment)))
 	})
 	notfoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
