@@ -56,3 +56,9 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta_image.outputs.tags }}
+      
+      - name: add label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.comment.body, '/deploy') }}
+        with:
+          labels: deploy
