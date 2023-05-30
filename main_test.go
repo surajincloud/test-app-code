@@ -25,7 +25,7 @@ func TestHandler(t *testing.T) {
 			rr.Code, http.StatusOK)
 	}
 
-	expected := "New feature: Hello World from "
+	expected := "New feature v2: Hello World from "
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
